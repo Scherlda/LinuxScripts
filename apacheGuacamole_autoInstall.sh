@@ -166,6 +166,24 @@ sudo mkdir -p /opt/tomcat/.guacamole
 sudo ln -s /etc/guacamole/
 
 ############################################
+# Ensure guacamole.properties is properly linked
+############################################
+
+echo "Setting up guacamole.properties symlink..."
+
+# Make sure directory and file exist
+sudo mkdir -p /etc/guacamole
+sudo touch /etc/guacamole/guacamole.properties
+
+# Symlink for Tomcat
+sudo rm -f /opt/tomcat/.guacamole
+sudo ln -s /etc/guacamole /opt/tomcat/.guacamole
+
+# Optional: set permissions (for safety)
+sudo chown -R $TOMCAT_USER:$TOMCAT_GROUP /etc/guacamole
+
+
+############################################
 # Restart services
 ############################################
 
@@ -197,3 +215,5 @@ echo "You can now log in with: Username: guacadmin | Password: guacadmin"
 echo "Tip: Log in, create a new user and change the admin password"
 echo "manually via the web interface."
 echo "-------------------------------------------------------------"
+
+
